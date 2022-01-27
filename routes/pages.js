@@ -66,9 +66,8 @@ Router.get('/join', (req, res) => {
     url1 = process.env.PUSKES_URL;
     axios.get(url1, {headers: Headers})
     .then(function (res) {
-        var datapuskes = res.data.data;
-        // var datakecamatan = res.data.data;
-        // console.log(data);
+        var datapuskes = res.data;
+
         const Headers = {
             'Authorization': 'rahasia',
             'Content-Type': 'application/json'
@@ -77,24 +76,17 @@ Router.get('/join', (req, res) => {
         url2 = process.env.KECAMATAN_URL;
         axios.get(url2, {headers: Headers})
         .then(function (res) {
-            var datakecamatan = res.data.data;
+            var datakecamatan = res.data;
             // console.log(datapuskes)
             // console.log(datakecamatan)
 
-            arrayList = [], obj_c_processed = [];
+            var arrayData = []
 
-            for(var i in datakecamatan){
-                if(datakecamatan[i].id_kecamatan === '317203'){
-                    arrayList.push({id: datakecamatan[i].id_kecamatan})
-                }
-            }
-
-            console.log(arrayList)
         })
         .catch(function (err) {
         // console.log(err);
         //var message = err.response.data.message;
-        console.log("error");
+        console.log(err);
         })
     })
     .catch(function (err) {
