@@ -77,17 +77,10 @@ Router.get('/join', (req, res) => {
         axios.get(url2, {headers: Headers})
         .then(function (res) {
             var datakecamatan = res.data.data;
-            // console.log(datapuskes)
-            // console.log(datakecamatan)
-
-            // var arrayData = []
-            // arrayData.push(datapuskes, datakecamatan);
-            // console.log(arrayData)
-
             var merged = []
             
-            for(var i in datapuskes){
-                for(var j in datakecamatan){
+            for(var j in datakecamatan){
+                for(var i in datapuskes){
                     if(datakecamatan[j].id_kecamatan === datapuskes[i].kode_kecamatan){
                         merged.push({...datapuskes[i], ...datakecamatan[j]})
                     }
