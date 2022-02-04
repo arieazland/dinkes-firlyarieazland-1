@@ -9,7 +9,7 @@ require("moment/locale/id");  // without this line it didn't work
 Moment.locale('id');
 
 Dotenv.config({ path: './.env' });
-const Connection = require ("../DBconnection");
+// const Connection = require ("../DBconnection");
 
 /** Route for home */
 Router.get('/', (req, res) => {
@@ -87,11 +87,11 @@ Router.get('/join', (req, res) => {
             var merged = []
             
             for(var i in datapuskes){
-                merged.push({
-                    ...datapuskes[i],
-                    ...(datakecamatan.find((itmInner) => itmInner.id_kecamatan === datapuskes.kode_kecamatan)),
-                    ...datakecamatan[i]
-                });
+                for(var j in datakecamatan){
+                    if(datakecamatan[j].id_kecamatan === datapuskes[i].kode_kecamatan){
+                        merged.push({...datapuskes[i], ...datakecamatan[j]})
+                    }
+                }
             }
 
             console.log(merged)
